@@ -1,0 +1,25 @@
+.signupContainer {
+  width: 30em;
+  margin: 10em auto;
+  .signupForm {
+    display: flex;
+    flex-direction: column;
+    .input {
+      height: 3em;
+      margin: 0.5em 0;
+    }
+    .submitBtn {
+      height: 3em;
+      margin: 2em 0;
+    }
+    .name {
+      display: flex;
+      .input {
+        flex-grow: 1;
+      }
+      .space {
+        width: 1rem;
+      }
+    }
+  }
+}
