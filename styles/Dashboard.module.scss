@@ -1,0 +1,67 @@
+.container {
+  height: 92vh;
+  display: grid;
+  grid-template-columns: 20rem auto;
+  gap: 1rem;
+  padding: 2rem;
+  .section {
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .transactions {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}
+
+.model {
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.24);
+  justify-content: center;
+  align-items: center;
+  .modelBox {
+    position: relative;
+    background-color: white;
+    padding: 3rem;
+    height: 40rem;
+    width: 50rem;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    .closeBtn {
+      position: absolute;
+      right: 2rem;
+      top: 2rem;
+    }
+  }
+}
+.disabledModel {
+  display: none;
+}
+
+.propForm {
+  align-items: center;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  width: auto;
+  margin: 3rem;
+  .propFormInputs {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    height: 3rem;
+    &:nth-child(4) {
+      grid-column-start: 1;
+      grid-column-end: 2;
+    }
+    &:nth-child(5) {
+      grid-column-start: 2;
+      grid-column-end: 3;
+    }
+  }
+}

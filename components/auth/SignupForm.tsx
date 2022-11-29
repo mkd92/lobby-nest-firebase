@@ -55,7 +55,7 @@ const SignupForm = () => {
     }
   };
   const handleOnChange = (e: FormEvent<HTMLInputElement>) => {
-    (e.target as HTMLInputElement).value;
+    // (e.target as HTMLInputElement).value;
     const name = (e.target as HTMLInputElement).name;
     const value = (e.target as HTMLInputElement).value;
     const newState = formData;
