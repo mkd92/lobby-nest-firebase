@@ -3,6 +3,7 @@ import { FieldValue } from "firebase/firestore";
 import { RootState } from "../store";
 interface UnitState {
   units: UnitType[] | [];
+  selectedUnitId: string | null;
 }
 export interface UnitType {
   uid: string;
@@ -13,8 +14,9 @@ export interface UnitType {
   timeStamp?: FieldValue;
   unitId?: string;
 }
-const initialState = {
-  units: []
+const initialState: UnitState = {
+  units: [],
+  selectedUnitId: null
 };
 export const unitSlice = createSlice({
   name: "units",
@@ -27,5 +29,7 @@ export const unitSlice = createSlice({
 });
 
 export const { updateUnits } = unitSlice.actions;
-export const selectUnits = (state: RootState) => state.units.units;
 export const unitsReducer = unitSlice.reducer;
+export const selectUnits = (state: RootState) => state.units.units;
+export const selectSelectedUnitId = (state: RootState) =>
+  state.units.selectedUnitId;

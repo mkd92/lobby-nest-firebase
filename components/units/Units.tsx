@@ -39,35 +39,39 @@ const Units = () => {
           <AddUnitForm closeModel={closeModelHandler} />
         </Box>
       </Modal>
-      <Grid
-        container
-        sx={{
-          padding: "1rem",
-          gap: "1rem"
-        }}
-        // spacing={2}
-      >
-        <Grid
-          item
-          xs={2}
-          sx={{
-            height: "10rem"
-          }}
-        >
-          <AddUnitButton openModel={openModelHandler} />
-        </Grid>
-        {units.map((unit: UnitType) =>
-          <Grid
-            key={unit.unitId}
-            xs={2}
+      {selectedPropId
+        ? <Grid
+            container
             sx={{
-              height: "10rem"
+              padding: "1rem",
+              gap: "1rem"
             }}
           >
-            <Unit unit={unit} />
+            <Grid
+              item
+              xs={2}
+              sx={{
+                height: "10rem"
+              }}
+            >
+              <AddUnitButton openModel={openModelHandler} />
+            </Grid>
+            {units.map((unit: UnitType) =>
+              <Grid
+                item
+                key={unit.unitId}
+                xs={2}
+                sx={{
+                  height: "10rem"
+                }}
+              >
+                <Unit unit={unit} />
+              </Grid>
+            )}
           </Grid>
-        )}
-      </Grid>
+        : <Grid>
+            <Typography>Select a Propperty</Typography>
+          </Grid>}
     </div>
   );
 };
