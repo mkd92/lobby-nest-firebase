@@ -11,6 +11,7 @@ import { db } from "../firebase/firebase";
 export const useFetchProperties = () => {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
+
   const properties = useAppSelector(selectProperties);
 
   useEffect(() => {
@@ -28,5 +29,6 @@ export const useFetchProperties = () => {
       };
     }
   }, []);
+
   return properties;
 };

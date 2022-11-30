@@ -13,12 +13,14 @@ import { AddUnitsInput, addUnitsUtils } from "../../utils/units/addUnitsUtils";
 import { useAppSelector } from "../../app/hooks";
 import { selectSelectedPropId } from "../../app/propertySlice/propertySlice";
 import { selectUser } from "../../app/authSlice/authSlice";
-
-const AddUnitForm = () => {
+interface AddUnitFormInput {
+  closeModel:()=>void
+} 
+const AddUnitForm = ({closeModel}:AddUnitFormInput) => {
   const propId = useAppSelector(selectSelectedPropId);
   const uid = useAppSelector(selectUser)?.uid;
 
-  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler =async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if(uid){
@@ -32,7 +34,8 @@ const AddUnitForm = () => {
       data.forEach((value, key) => {
         formData = { ...formData, [key]: value };
       });
-      addUnitsUtils(formData);
+      await addUnitsUtils(formData);
+      closeModel()
     }
   };
   return (

@@ -10,12 +10,12 @@ export interface PropertyState {
 }
 type InitialStateType = {
   properties: PropertyState[];
-  selectedPropId: string;
+  selectedPropId: null;
   // TODO: this should be an object with id key
 };
 const initialState: InitialStateType = {
   properties: [],
-  selectedPropId: ""
+  selectedPropId: null
 };
 export const propertiesSlice = createSlice({
   name: "properties",

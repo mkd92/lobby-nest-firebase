@@ -2,9 +2,18 @@ import React, { useState } from "react";
 import { Grid, Modal, Typography, Box } from "@mui/material";
 import AddUnitButton from "./AddUnitButton";
 import AddUnitForm from "./AddUnitForm";
+import { useFetchUnits } from "../../utils/units/useFetchUnits";
+import { useAppSelector } from "../../app/hooks";
+import { selectSelectedPropId } from "../../app/propertySlice/propertySlice";
+import Unit from "./Unit";
+import { selectUnits, UnitType } from "../../app/unitSlice/unitSlice";
 
 const Units = () => {
   const [open, setOpen] = useState(false);
+  const selectedPropId = useAppSelector(selectSelectedPropId);
+  useFetchUnits();
+  const units = useAppSelector(selectUnits);
+
   const modalBoxStyle = {
     position: "absolute" as "absolute",
     top: "50%",
@@ -23,28 +32,43 @@ const Units = () => {
     setOpen(false);
   };
   return (
-    <Grid
-      container
-      sx={{
-        padding: "1rem"
-      }}
-    >
+    <div>
       <Modal open={open} onClose={closeModelHandler}>
         <Box sx={modalBoxStyle}>
           <Typography>Modal</Typography>
-          <AddUnitForm />
+          <AddUnitForm closeModel={closeModelHandler} />
         </Box>
       </Modal>
       <Grid
-        item
-        xs={2}
+        container
         sx={{
-          height: "10rem"
+          padding: "1rem",
+          gap: "1rem"
         }}
+        // spacing={2}
       >
-        <AddUnitButton openModel={openModelHandler} />
+        <Grid
+          item
+          xs={2}
+          sx={{
+            height: "10rem"
+          }}
+        >
+          <AddUnitButton openModel={openModelHandler} />
+        </Grid>
+        {units.map((unit: UnitType) =>
+          <Grid
+            key={unit.unitId}
+            xs={2}
+            sx={{
+              height: "10rem"
+            }}
+          >
+            <Unit unit={unit} />
+          </Grid>
+        )}
       </Grid>
-    </Grid>
+    </div>
   );
 };
 
