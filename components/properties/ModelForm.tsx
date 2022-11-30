@@ -1,17 +1,43 @@
-import { setDoc } from "firebase/firestore/lite";
-import React, { FormEvent, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { addProperty } from "../app/propertySlice/propertySlice";
-import styles from "../styles/Dashboard.module.scss";
-import { selectUser } from "../app/authSlice/authSlice";
-import { addPropertyUtil } from "../utils/properties";
+import React, { FormEvent, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import {
+  addProperty,
+  updateProperties
+} from "../../app/propertySlice/propertySlice";
+import styles from "../../styles/Dashboard.module.scss";
+import { selectUser } from "../../app/authSlice/authSlice";
+import { addPropertyUtil } from "../../utils/properties";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  setDoc
+} from "firebase/firestore";
+import { db } from "../../utils/firebase/firebase";
 type ModelInput = {
   enabled: boolean;
   handleClose: Function;
 };
 export const ModelForm = ({ enabled, handleClose }: ModelInput) => {
-  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (user) {
+      const uid = user.uid;
+      const q = query(
+        collection(db, "users", uid, "properties"),
+        orderBy("timeStamp")
+      );
+      const unSubscribe = onSnapshot(q, snapshot => {
+        dispatch(updateProperties(snapshot.docs.map(doc => doc.data())));
+      });
+      return () => {
+        unSubscribe();
+      };
+    }
+  }, []);
+
   const [propFormData, setPropFormData] = useState({
     propName: "",
     propAddress_1: "",

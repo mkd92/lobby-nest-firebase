@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { selectUser } from "../../app/authSlice/authSlice";
 import { useAppSelector } from "../../app/hooks";
-import Properties from "../../components/Properties";
+import Properties from "../../components/properties/Properties";
 import Transactions from "../../components/Transactions";
 import Units from "../../components/Units";
 import styles from "../../styles/Dashboard.module.scss";

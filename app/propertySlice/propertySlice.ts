@@ -8,20 +8,19 @@ export interface PropertyState {
   propState: string;
   propPin: string;
 }
-const initialState: PropertyState = {
-  propName: "",
-  propAddress_1: "",
-  propAddress_2: "",
-  propCity: "",
-  propState: "",
-  propPin: ""
+type InitialStateType = {
+  properties: PropertyState[];
+  // TODO: this should be an object with id key
+};
+const initialState: InitialStateType = {
+  properties: []
 };
 export const propertiesSlice = createSlice({
   name: "properties",
   initialState,
   reducers: {
-    updateProperties: state => {
-      state = state;
+    updateProperties: (state, { payload }) => {
+      state.properties = [...payload];
     },
     addProperty: (state, action: PayloadAction<any>) => {
       console.log(action.payload);
@@ -30,5 +29,6 @@ export const propertiesSlice = createSlice({
 });
 
 export const { updateProperties, addProperty } = propertiesSlice.actions;
-export const selectProperties = (state: RootState) => state.properties;
+export const selectProperties = (state: RootState) =>
+  state.properties.properties;
 export const propertiesReducer = propertiesSlice.reducer;
