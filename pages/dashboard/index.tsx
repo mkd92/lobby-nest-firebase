@@ -4,9 +4,9 @@ import { selectUser } from "../../app/authSlice/authSlice";
 import { useAppSelector } from "../../app/hooks";
 import Properties from "../../components/properties/Properties";
 import Transactions from "../../components/Transactions";
-import Units from "../../components/Units";
+import Units from "../../components/units/Units";
 import styles from "../../styles/Dashboard.module.scss";
-
+import { Box, Paper } from "@mui/material";
 const Dashboard = () => {
   const user = useAppSelector(selectUser);
   const router = useRouter();
@@ -14,17 +14,27 @@ const Dashboard = () => {
     if (!user) router.push("/");
   }, []);
   return (
-    <div className={styles.container}>
-      <div className={[styles.section, styles.properties].join(" ")}>
+    <Box
+      sx={{
+        height: "92vh",
+        width: "100%",
+        display: "grid",
+        gridTemplateColumns: "20rem auto",
+        gridTemplateRows: "1fr 1fr",
+        gap: "1rem",
+        padding: "2rem"
+      }}
+    >
+      <Paper elevation={1} sx={{ overflow: "auto" }}>
         <Properties />
-      </div>
-      <div className={[styles.section, styles.units].join(" ")}>
+      </Paper>
+      <Paper>
         <Units />
-      </div>
-      <div className={[styles.section, styles.transactions].join(" ")}>
+      </Paper>
+      <Paper sx={{ gridColumnStart: "1", gridColumnEnd: "3" }}>
         <Transactions />
-      </div>
-    </div>
+      </Paper>
+    </Box>
   );
 };
 export default Dashboard;

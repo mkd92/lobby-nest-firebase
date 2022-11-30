@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { authReducer } from "./authSlice/authSlice";
 import { propertiesReducer } from "./propertySlice/propertySlice";
+import { unitsReducer } from "./unitSlice/unitSlice";
 
 const persistConfig = {
   key: "root",
@@ -14,8 +15,8 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     persisted: persistedReducer,
-    properties: propertiesReducer
-    // auth: authReducer
+    properties: propertiesReducer,
+    units: unitsReducer
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({ serializableCheck: false })

@@ -22,21 +22,6 @@ type ModelInput = {
 export const ModelForm = ({ enabled, handleClose }: ModelInput) => {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    if (user) {
-      const uid = user.uid;
-      const q = query(
-        collection(db, "users", uid, "properties"),
-        orderBy("timeStamp")
-      );
-      const unSubscribe = onSnapshot(q, snapshot => {
-        dispatch(updateProperties(snapshot.docs.map(doc => doc.data())));
-      });
-      return () => {
-        unSubscribe();
-      };
-    }
-  }, []);
 
   const [propFormData, setPropFormData] = useState({
     propName: "",
@@ -55,6 +40,7 @@ export const ModelForm = ({ enabled, handleClose }: ModelInput) => {
       });
       if (propAdded) {
         const data = propAdded.data();
+
         dispatch(addProperty(data));
       }
     }

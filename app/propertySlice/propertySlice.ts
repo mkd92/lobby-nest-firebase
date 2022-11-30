@@ -10,10 +10,12 @@ export interface PropertyState {
 }
 type InitialStateType = {
   properties: PropertyState[];
+  selectedPropId: string;
   // TODO: this should be an object with id key
 };
 const initialState: InitialStateType = {
-  properties: []
+  properties: [],
+  selectedPropId: ""
 };
 export const propertiesSlice = createSlice({
   name: "properties",
@@ -22,13 +24,15 @@ export const propertiesSlice = createSlice({
     updateProperties: (state, { payload }) => {
       state.properties = [...payload];
     },
-    addProperty: (state, action: PayloadAction<any>) => {
-      console.log(action.payload);
+    focusProperty: (state, action: PayloadAction<any>) => {
+      state.selectedPropId = action.payload;
     }
   }
 });
 
-export const { updateProperties, addProperty } = propertiesSlice.actions;
+export const { updateProperties, focusProperty } = propertiesSlice.actions;
 export const selectProperties = (state: RootState) =>
   state.properties.properties;
+export const selectSelectedPropId = (state: RootState) =>
+  state.properties.selectedPropId;
 export const propertiesReducer = propertiesSlice.reducer;

@@ -3,6 +3,7 @@ import { useAppSelector } from "../../app/hooks";
 import { selectProperties } from "../../app/propertySlice/propertySlice";
 import { ModelForm } from "./ModelForm";
 import PropertyListItem from "./PropertyListItem";
+import { useFetchProperties } from "../../utils/properties/useFetchProperties";
 import {
   List,
   ListItem,
@@ -13,8 +14,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 const Properties = () => {
   const [modelEnabled, setModelEnabled] = useState(false);
-  const properties = useAppSelector(selectProperties);
-
+  const properties = useFetchProperties();
   const modelClosingHandler = () => {
     setModelEnabled(false);
   };

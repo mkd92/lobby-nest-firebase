@@ -4,7 +4,8 @@ import {
   doc,
   getDoc,
   serverTimestamp,
-  setDoc
+  setDoc,
+  updateDoc
 } from "firebase/firestore";
 import { PropertyState } from "../../app/propertySlice/propertySlice";
 import { db } from "../firebase/firebase";
@@ -17,14 +18,23 @@ export const addPropertyUtil = async (
   addPropertyInput: AddPropertyInputType
 ) => {
   // setDoc(doc(db,))
-  const { uid, data } = addPropertyInput;
-  const document = await addDoc(collection(db, "users", uid, "properties"), {
-    ...data,
-    timeStamp: serverTimestamp()
-  });
-  const propSnap = await getDoc(document);
-  if (propSnap.exists()) {
-    return propSnap;
+  try {
+    const { uid, data } = addPropertyInput;
+    const document = await addDoc(collection(db, "users", uid, "properties"), {
+      ...data,
+      timeStamp: serverTimestamp()
+    });
+    const propId = document.id;
+    const docRef = doc(db, "users", uid, "properties", propId);
+    const updatedDoc = await updateDoc(docRef, {
+      propId
+    });
+    const propSnap = await getDoc(docRef);
+
+    if (propSnap.exists()) {
+      return propSnap;
+    }
+  } catch (e) {
+    return null;
   }
-  return null;
 };
