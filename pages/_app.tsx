@@ -4,15 +4,28 @@ import Layout from "../components/Layout";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
 import { PersistGate } from "redux-persist/integration/react";
-import {persistor } from "../app/store"
-import "../styles/globals.scss"
+import { persistor } from "../app/store"
+// import "../styles/globals.scss"
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
 export default function App({ Component, pageProps }: AppProps) {
+  const theme = createTheme({
+    palette:{
+      primary:{
+        main:"#212121",
+      },
+      
+    }
+  })
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <ThemeProvider theme={theme}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
       </PersistGate>  
     </Provider>
   );

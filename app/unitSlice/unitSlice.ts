@@ -24,11 +24,14 @@ export const unitSlice = createSlice({
   reducers: {
     updateUnits: (state, { payload }) => {
       state.units = payload;
+    },
+    updateSelectedUnit: (state, { payload }) => {
+      state.selectedUnitId = payload;
     }
   }
 });
 
-export const { updateUnits } = unitSlice.actions;
+export const { updateUnits, updateSelectedUnit } = unitSlice.actions;
 export const unitsReducer = unitSlice.reducer;
 export const selectUnits = (state: RootState) => state.units.units;
 export const selectSelectedUnitId = (state: RootState) =>

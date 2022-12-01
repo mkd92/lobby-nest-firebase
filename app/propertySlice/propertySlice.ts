@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 export interface PropertyState {
+  propId: string;
   propName: string;
   propAddress_1: string;
   propAddress_2: string;

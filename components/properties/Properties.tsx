@@ -28,9 +28,6 @@ const Properties = () => {
         <ListItem>
           <ListItemText>Properties</ListItemText>
         </ListItem>
-        {properties.map((property, index) =>
-          <PropertyListItem key={index} property={property} />
-        )}
         <ListItem>
           <ListItemButton onClick={modelOpenHandler}>
             <ListItemIcon>
@@ -39,6 +36,9 @@ const Properties = () => {
             <ListItemText>Add Property</ListItemText>
           </ListItemButton>
         </ListItem>
+        {properties.map((property, index) =>
+          <PropertyListItem key={index} property={property} />
+        )}
       </List>
     </div>
   );

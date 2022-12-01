@@ -11,7 +11,7 @@ import { db } from "../firebase/firebase";
 
 export interface AddUnitsInput {
   uid: string;
-  propId: string;
+  propId: string | null;
   unitName: string;
   unitFloor: number;
   unitStatus: "VACANT" | "BOOKED" | "OCCUPIED";

@@ -6,6 +6,7 @@ export interface TransactionType {
   uid: string;
   propId: string;
   unitId: string;
+  tenantId?: string;
   transactionId?: string;
   timeStamp?: FieldValue;
   createdAt: string;
