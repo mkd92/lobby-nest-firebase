@@ -20,20 +20,21 @@ export const addPropertyUtil = async (
   // setDoc(doc(db,))
   try {
     const { uid, data } = addPropertyInput;
-    const document = await addDoc(collection(db, "users", uid, "properties"), {
+    const document = await addDoc(collection(db, "properties"), {
       ...data,
-      timeStamp: serverTimestamp()
+      timeStamp: serverTimestamp(),
+      uid
     });
-    const propId = document.id;
-    const docRef = doc(db, "users", uid, "properties", propId);
-    const updatedDoc = await updateDoc(docRef, {
-      propId
-    });
-    const propSnap = await getDoc(docRef);
+    // const propId = document.id;
+    // const docRef = doc(db, "users", uid, "properties", propId);
+    // const updatedDoc = await updateDoc(docRef, {
+    // propId
+    // });
+    // const propSnap = await getDoc(docRef);
 
-    if (propSnap.exists()) {
-      return propSnap;
-    }
+    // if (propSnap.exists()) {
+    // return propSnap;
+    // }
   } catch (e) {
     return null;
   }

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { QueryDocumentSnapshot } from "firebase/firestore";
 import { RootState } from "../store";
 export interface PropertyState {
   propId: string;
@@ -10,8 +11,8 @@ export interface PropertyState {
   propPin: string;
 }
 type InitialStateType = {
-  properties: PropertyState[];
-  selectedPropId: null;
+  properties: QueryDocumentSnapshot[];
+  selectedPropId: null | string;
   // TODO: this should be an object with id key
 };
 const initialState: InitialStateType = {

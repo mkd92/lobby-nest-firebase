@@ -7,6 +7,7 @@ import { useAppSelector } from "../../app/hooks";
 import { selectSelectedPropId } from "../../app/propertySlice/propertySlice";
 import Unit from "./Unit";
 import { selectUnits, UnitType } from "../../app/unitSlice/unitSlice";
+import { QueryDocumentSnapshot } from "firebase/firestore";
 
 const Units = () => {
   const [open, setOpen] = useState(false);
@@ -56,10 +57,10 @@ const Units = () => {
             >
               <AddUnitButton openModel={openModelHandler} />
             </Grid>
-            {units.map((unit: UnitType) =>
+            {units.map((unit: QueryDocumentSnapshot) =>
               <Grid
                 item
-                key={unit.unitId}
+                key={unit.id}
                 xs={2}
                 sx={{
                   height: "10rem"

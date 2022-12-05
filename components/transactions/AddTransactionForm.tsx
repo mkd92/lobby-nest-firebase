@@ -77,8 +77,8 @@ const AddTransactionForm = () => {
           label="Select Property"
         >
           {properties.map(property =>
-            <MenuItem value={property.propId} key={property.propId}>
-              {property.propName}
+            <MenuItem value={property.id} key={property.id}>
+              {property.data().propName}
             </MenuItem>
           )}
           <MenuItem value="select">Select Property</MenuItem>
@@ -94,10 +94,10 @@ const AddTransactionForm = () => {
           onChange={onChangeUnit}
           label="Select Unit"
         >
-          {units.length > 1
+          {units.length > 0
             ? units.map(unit =>
-                <MenuItem value={unit.unitId} key={unit.unitId}>
-                  {unit.unitName}
+                <MenuItem value={unit.id} key={unit.id}>
+                  {unit.data().unitName}
                 </MenuItem>
               )
             : <MenuItem>Add Units to Property</MenuItem>}

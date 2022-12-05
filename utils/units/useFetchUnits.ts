@@ -1,5 +1,5 @@
 import { Unsubscribe } from "@mui/icons-material"
-import { collection, onSnapshot, query, where } from "firebase/firestore"
+import { collection, onSnapshot, query, QueryDocumentSnapshot, QuerySnapshot, where } from "firebase/firestore"
 import { useEffect } from "react"
 import { selectUser } from "../../app/authSlice/authSlice"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
@@ -14,11 +14,11 @@ export const useFetchUnits = ()=>{
 
     useEffect(()=>{
         if(uid){
-            const q = query(collection(db,"users",uid,"units"),where("propId","==",propId)
+            const q = query(collection(db,"units"),where("propId","==",propId)
             )
-            // console.log(propId,"Propid");
             const unSubscribe = onSnapshot(q,snapshot=>{
-                const snap = snapshot.docs.map(doc=>doc.data());
+                const snap:QueryDocumentSnapshot[] = []
+                snapshot.docs.forEach(doc=>snap.push(doc));
                 dispatch(updateUnits(snap))
             });
             return ()=>{

@@ -34,7 +34,7 @@ const index = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" elevation={0}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -65,14 +65,18 @@ const index = () => {
                 <Button
                   component={Link}
                   href="/signup"
-                  sx={{ color: "white", display: "block" }}
+                  variant="outlined"
+                  color="secondary"
+                  // sx={{ color: "#242424", display: "block" }}
                 >
                   Signup
                 </Button>
                 <Button
                   component={Link}
                   href="/login"
-                  sx={{ color: "white", display: "block" }}
+                  variant="outlined"
+                  color="secondary"
+                  sx={{ marginLeft: "1rem " }}
                 >
                   Login
                 </Button>
@@ -85,7 +89,35 @@ const index = () => {
                 }}
               >
                 <Button
-                  sx={{ color: "white", display: "block" }}
+                  component={Link}
+                  variant={
+                    router.asPath === "/user/tenant" ? "outlined" : "text"
+                  }
+                  href="/user/tenant"
+                  color="secondary"
+                  sx={{
+                    marginLeft: "1rem"
+                  }}
+                >
+                  Tenant
+                </Button>
+                <Button
+                  component={Link}
+                  variant={router.asPath === "/dashboard" ? "outlined" : "text"}
+                  href="/dashboard"
+                  color="secondary"
+                  sx={{
+                    marginLeft: "1rem"
+                  }}
+                >
+                  Dashboard
+                </Button>
+                <Button
+                  variant="text"
+                  color="secondary"
+                  sx={{
+                    marginLeft: "1rem"
+                  }}
                   onClick={onClickHandler}
                 >
                   Logout

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FieldValue } from "firebase/firestore";
+import { FieldValue, QueryDocumentSnapshot } from "firebase/firestore";
 import { RootState } from "../store";
 interface UnitState {
-  units: UnitType[] | [];
+  units: QueryDocumentSnapshot[] | [];
   selectedUnitId: string | null;
 }
 export interface UnitType {

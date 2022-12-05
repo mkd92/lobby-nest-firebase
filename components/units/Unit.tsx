@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { QueryDocumentSnapshot } from "firebase/firestore";
 import React from "react";
 import { useAppDispatch } from "../../app/hooks";
 import { updateSelectedUnit } from "../../app/unitSlice/unitSlice";
@@ -6,10 +7,10 @@ import { UnitType } from "../../app/unitSlice/unitSlice";
 interface UnitInputType {
   unit: UnitType;
 }
-const Unit = ({ unit }: UnitInputType) => {
+const Unit = ({ unit }: { unit: QueryDocumentSnapshot }) => {
   const dispatch = useAppDispatch();
   const onUnitSelected = () => {
-    dispatch(updateSelectedUnit(unit.unitId));
+    dispatch(updateSelectedUnit(unit.id));
   };
   return (
     <Button
@@ -17,7 +18,7 @@ const Unit = ({ unit }: UnitInputType) => {
       sx={{ height: "100%", width: "100%", borderRadius: "1rem" }}
       onClick={onUnitSelected}
     >
-      {unit.unitName}
+      {unit.data().unitName}
     </Button>
   );
 };

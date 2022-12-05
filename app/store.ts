@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { authReducer } from "./authSlice/authSlice";
 import { propertiesReducer } from "./propertySlice/propertySlice";
+import { tenantReducers } from "./tenantSlice/tenantSlice";
 import { transactionReducer } from "./transactionSlice/transactionSlice";
 import { unitsReducer } from "./unitSlice/unitSlice";
 
@@ -18,7 +19,8 @@ export const store = configureStore({
     persisted: persistedReducer,
     properties: propertiesReducer,
     units: unitsReducer,
-    transactions: transactionReducer
+    transactions: transactionReducer,
+    tenants: tenantReducers
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({ serializableCheck: false })

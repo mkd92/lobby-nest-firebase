@@ -12,8 +12,15 @@ export default function App({ Component, pageProps }: AppProps) {
   const theme = createTheme({
     palette:{
       primary:{
-        main:"#212121",
+        main:"#FBF7F4",
+        contrastText:"#242424",
       },
+      secondary:{
+        main:"#242424"
+      },
+      background:{
+        default:"#fbf7f4"
+      }
       
     }
   })
