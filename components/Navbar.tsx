@@ -4,7 +4,7 @@ import {
   Button,
   Container,
   Toolbar,
-  Typography
+  Typography,
 } from "@mui/material";
 import { letterSpacing } from "@mui/system";
 import { signOut } from "firebase/auth";
@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { logout, selectUser } from "../app/authSlice/authSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { colors } from "../styles/colors";
 import styles from "../styles/Navbar.module.scss";
 import { auth } from "../utils/firebase/firebase";
 import LogoutBtn from "./LogoutBtn";
@@ -28,7 +29,7 @@ const index = () => {
         dispatch(logout());
         router.push("/");
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   };
@@ -48,49 +49,58 @@ const index = () => {
               fontFamily: "roboto",
               fontWeight: 700,
               letterSpacing: "none",
-              color: "inherit",
-              textDecoration: "none"
+              color: colors.dark.textColor,
+              textDecoration: "none",
             }}
           >
             Lobby
           </Typography>
-          {!user
-            ? <Box
-                sx={{
-                  display: "flex",
-                  flexGrow: 1,
-                  justifyContent: "flex-end"
-                }}
+          {!user ? (
+            <Box
+              sx={{
+                display: "flex",
+                flexGrow: 1,
+                justifyContent: "flex-end",
+              }}
+            >
+              <Button
+                component={Link}
+                href="/signup"
+                variant="outlined"
+                color={"secondary"}
               >
-                <Button
-                  component={Link}
-                  href="/signup"
-                  sx={{ color: "white", display: "block" }}
-                >
-                  Signup
-                </Button>
-                <Button
-                  component={Link}
-                  href="/login"
-                  sx={{ color: "white", display: "block" }}
-                >
-                  Login
-                </Button>
-              </Box>
-            : <Box
-                sx={{
-                  display: "flex",
-                  flexGrow: 1,
-                  justifyContent: "flex-end"
-                }}
+                Signup
+              </Button>
+              <Button
+                component={Link}
+                href="/login"
+                color={"secondary"}
+                variant="outlined"
+                sx={{ marginLeft: "1rem" }}
               >
-                <Button
-                  sx={{ color: "white", display: "block" }}
-                  onClick={onClickHandler}
-                >
-                  Logout
-                </Button>
-              </Box>}
+                Login
+              </Button>
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                flexGrow: 1,
+                justifyContent: "flex-end",
+              }}
+            >
+              <Button color={"secondary"} sx={{ marginLeft: "1rem" }}>
+                Tenants
+              </Button>
+              <Button
+                color={"secondary"}
+                onClick={onClickHandler}
+                sx={{ marginLeft: "1rem" }}
+              >
+                Logout
+              </Button>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
